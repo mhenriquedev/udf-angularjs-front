@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+   <title>Template inicial com angular</title>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.js"></script>
+
+   <script src="./controllers//CriancaController.js"></script>
+   <link href="./css/main.css" rel="stylesheet" />
+
+   <head>
+
+      <body ng-app="CriancaManagement" ng-controller="CriancaController">
+         <h3>Ah lelek</h3>
+         <form ng-submit="atualizaCrianca()">
+            <table border="0">
+               <tr>
+                  <td>Crianca id</td>
+                  <td>{{criancaForm.id}}</td>
+               </tr>
+               <tr>
+                  <td>Crianca nome</td>
+                  <td>
+                     <input type="text" ng-model="criancaForm.nome" />
+                  </td>
+               </tr>
+               <tr>
+                  <td>Crianca idade</td>
+                  <td>
+                     <input type="text" ng-model="criancaForm.idade" />
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">
+                     <input type="submit" value="Submit" class="blue-button" />
+                  </td>
+               </tr>
+            </table>
+         </form>
+         <br />
+         <a class="create-button" ng-click="adicionaCrianca()">Adicionar criança</a>
+         <table border="1">
+            <tr>
+               <th>Crianca Id</th>
+               <th>Crianca Nome</th>
+               <th>Edit</th>
+               <th>Delete</th>
+            </tr>
+            <!-- $scope.employees -->
+            <tr ng-repeat="crianca in criancas">
+               <td>{{ crianca.id }}</td>
+               <td>{{ crianca.nome }}</td>
+               <td>{{ crianca.idade }}</td>
+               <td>
+                  <a ng-click="atualizaCrianca(crianca)" class="edit-button">Edit</a>
+               </td>
+               <td>
+                  <a ng-click="deletaCrianca(crianca)" class="delete-button">Delete</a>
+               </td>
+            </tr>
+         </table>
+      </body>
+
+</html>
