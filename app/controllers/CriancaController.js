@@ -43,7 +43,7 @@ app.controller("CriancaController", function ($scope, $http) {
       clearFormData();
    }
 
-   // HTTP DELETE- delete employee by Id
+   // HTTP DELETE- deleta crianca por Id
    // Call: http://localhost:8080/employee/{empId}
    $scope.deletaCrianca = (crianca) => {
       $http({
@@ -60,7 +60,7 @@ app.controller("CriancaController", function ($scope, $http) {
    };
 
    // Private Method
-   // HTTP GET- get all employees collection
+   // HTTP GET- busca todas as criancas
    // Call: http://localhost:8080/employees
    function refreshCriancaData() {
       $http({
@@ -87,7 +87,7 @@ app.controller("CriancaController", function ($scope, $http) {
       alert("Error: " + status + ":" + data);
    }
 
-   // Clear the form
+   // Limpa o formulario
    function clearFormData() {
       $scope.criancaForm.id = -1;
       $scope.criancaForm.nome = "";
