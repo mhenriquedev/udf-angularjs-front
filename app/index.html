@@ -32,13 +32,22 @@
                </tr>
                <tr>
                   <td colspan="2">
-                     <input type="submit" value="Submit" class="blue-button" />
+                     <!-- <input type="submit" value="Submit" class="blue-button" /> -->
                   </td>
                </tr>
             </table>
          </form>
          <br />
-         <a class="create-button" ng-click="adicionaCrianca()">Adicionar criança</a>
+         <a class="create-button" ng-click="adicionaCrianca(criancaForm.id)">Adicionar criança</a>
+         <br />
+         <br />
+         <input type="number" placeholder="Buscar crianca por id" ng-model="criancaId"/>
+         <button type="button" class="search-button" ng-click="buscaCriancaPorId(criancaId)">Buscar</button>
+         <br />
+         <br />
+         <input disabled="true" ng-model="criancaNome" />
+         <br />
+         <br />
          <table border="1">
             <tr>
                <th>Crianca Id</th>

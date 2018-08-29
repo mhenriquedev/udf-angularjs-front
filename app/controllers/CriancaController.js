@@ -5,10 +5,12 @@ app.controller("CriancaController", function ($scope, $http) {
 
    $scope.criancas = [];
    $scope.criancaForm = {
-      id: undefined,
-      nome: "Teste",
-      idade: 5
+      id: -1,
+      nome: "",
+      idade: null
    };
+   $scope.criancaNome;
+   $scope.criancaId;
 
    // Atualiza
    refreshCriancaData();
@@ -16,18 +18,18 @@ app.controller("CriancaController", function ($scope, $http) {
    // HTTP CRUD Para Crianca
    // Chamada: http://localhost:8080/criancas
    // TODO: Mover os métodos para 'services'
-   $scope.adicionaCrianca = () => {
+   $scope.adicionaCrianca = (id) => {
 
       method = "POST";
       url = 'http://localhost:8080/api/criancas/';
 
-      // if ($scope.criancaForm.id == -1) {
-      //    method = "POST";
-      //    url = 'http://localhost:8080/api/criancas/';
-      // } else {
-      //    method = "PUT";
-      //    url = 'http://localhost:8080/api/criancas/';
-      // }
+      if (id === -1) {
+         method = "POST";
+         url = 'http://localhost:8080/api/criancas/';
+      } else {
+         method = "PUT";
+         url = 'http://localhost:8080/api/criancas/' + id;
+      }
 
       $http({
          method: method,
@@ -39,18 +41,34 @@ app.controller("CriancaController", function ($scope, $http) {
       }).then(success, error);
    };
 
-   $scope.createEmployee = () => {
+   $scope.limpaFormulario = () => {
       clearFormData();
    }
 
    // HTTP DELETE- deleta crianca por Id
-   // Call: http://localhost:8080/employee/{empId}
+   // Call: http://localhost:8080/crianca/{id}
    $scope.deletaCrianca = (crianca) => {
       $http({
          method: 'DELETE',
          url: 'http://localhost:8080/api/criancas/' + crianca.id
       }).then(success, error);
    };
+
+   $scope.buscaCriancaPorId = (id) => {
+      $http({
+         method: 'GET',
+         url: 'http://localhost:8080/api/criancas/' + id
+      }).then((res) => {
+         console.log('res', res); // success
+         $scope.criancaNome = res.data.nome;
+         success();
+      })
+      .catch(error => {
+         $scope.criancaNome = "";
+         alert(error.data.message);
+         console.log('error', error)
+      })
+   }
 
    // In case of edit
    $scope.atualizaCrianca = (crianca) => {
@@ -61,7 +79,7 @@ app.controller("CriancaController", function ($scope, $http) {
 
    // Private Method
    // HTTP GET- busca todas as criancas
-   // Call: http://localhost:8080/employees
+   // Call: http://localhost:8080/criancas
    function refreshCriancaData() {
       $http({
          method: 'GET',
@@ -70,7 +88,7 @@ app.controller("CriancaController", function ($scope, $http) {
          console.log('res', res); // success
          $scope.criancas = res.data;
       }, (res) => { // error
-         console.log("Error: " + res.status + " : " + res.data);
+         console.log("Error: " + res.status + " : " + res);
       });
    }
 
@@ -91,7 +109,7 @@ app.controller("CriancaController", function ($scope, $http) {
    function clearFormData() {
       $scope.criancaForm.id = -1;
       $scope.criancaForm.nome = "";
-      $scope.criancaForm.idade = 0;
+      $scope.criancaForm.idade = null;
    }
    ;
 });
