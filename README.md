@@ -45,7 +45,6 @@ File > Preferences > Settings > User Settings (Canto superior direito) copiar, c
 "editor.minimap.enabled": false,
 "workbench.statusBar.visible": false,
 "workbench.activityBar.visible": true,
-"typescript.updateImportsOnFileMove.enabled": "always",
 "files.autoSave": "off"
 }
 ```

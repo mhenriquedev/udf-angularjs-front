@@ -23,3 +23,9 @@ table td, th {
 	background: #CD5C5C;
 	cursor: pointer;
 }
+
+.edit-button {
+	padding: 2px 5px;
+	background: rgb(118, 205, 92);
+	cursor: pointer;
+}
